@@ -45,6 +45,7 @@ def test_claude_cmd_isolates_global_claude_md_and_limits_tools():
 
 def test_strip_preamble():
     assert overseas.strip_preamble("全部搜索完成。\n\n---\n# 报告\n内容").startswith("# 报告")
+    assert overseas.strip_preamble("现在我有充分的信息。\n\n---\n\n## 报告\n内容").startswith("## 报告")
     assert overseas.strip_preamble("没有标题") == "没有标题"
 
 

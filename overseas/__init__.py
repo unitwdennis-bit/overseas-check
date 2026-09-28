@@ -5,6 +5,7 @@
 """
 import json
 import logging
+import re
 import subprocess
 from dataclasses import dataclass
 from datetime import date
@@ -68,11 +69,11 @@ def missing_sections(kind: str, text: str) -> list[str]:
 
 
 def strip_preamble(text: str) -> str:
-    """提示詞要求從標題開始，但模型偶爾先講一句「全部搜索完成…」（09-28 Opus 4.6 實測）。
-    第一個 `# ` 標題之前的東西拿掉；沒有標題就原樣回。"""
+    """提示詞要求從標題開始，但模型偶爾先講一句「全部搜索完成…」（09-28 Opus 4.6、Haiku 實測）。
+    第一個 Markdown 標題（任何層級，Haiku 用的是 `##`）之前的東西拿掉；沒有標題就原樣回。"""
     lines = text.splitlines()
     for i, line in enumerate(lines):
-        if line.startswith("# "):
+        if re.match(r"#{1,6} ", line):
             return "\n".join(lines[i:]).strip() + "\n"
     return text
 
