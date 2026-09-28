@@ -1,0 +1,11 @@
+# 複製成 config.yaml 後依本機修改（config.yaml 不進 git）
+
+# claude 執行檔。留空＝PATH 上的 claude。Windows 請寫原生 claude.exe 的絕對路徑：
+# npm 的 claude.cmd 殼會截斷多行 stdin，逾時也殺不到底下真正在跑的行程
+claude_bin: ""
+
+# 09-28 原型比較四個模型後使用者選 Opus 5（品質優先）
+model: claude-opus-5
+
+# 一位的逾時秒數。實測一位 11～18 分鐘（統一清單會把港新加都查過一輪）
+timeout_seconds: 2400
